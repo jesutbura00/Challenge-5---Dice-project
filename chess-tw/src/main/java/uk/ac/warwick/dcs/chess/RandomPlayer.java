@@ -1,5 +1,6 @@
 package uk.ac.warwick.dcs.chess;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import uk.ac.warwick.dcs.chess.piece.ChessPiece;
 
@@ -13,7 +14,7 @@ public class RandomPlayer implements Player {
     ArrayList<Double> myRandomList;
 
     public String getPlayerName(){
-        return "RandomPlayer";
+        return "Group 2";
     }
 
     public RandomPlayer (boolean isWhite) {
@@ -105,14 +106,33 @@ public class RandomPlayer implements Player {
             return null;
         }
 
-        int chosenNum = (int)(myRandomList.get(moveNum) * moveList.size());
-        
-        Move chosenMove = moveList.get(chosenNum);
-        if(Chess.verbosity > 0){
-            System.err.println(( isWhite ? "White": "Black") + " is choosing move " + chosenNum + " " + chosenMove.toString() + " out of " + moveList.size() + " possible moves");
-        }
         moveNum++;
-        createRandomList();
+        HashMap<Move,Boolean> map = new HashMap<>();
+        for(Move i : moveList){
+            map.put(i,i.isTakePiece());
+        }
+
+        ArrayList<Move> tMoves = new ArrayList<>();
+        ArrayList<Move> nMoves = new ArrayList<>();
+        map.forEach((k,val) -> {
+            if (val.equals(true)) {
+              tMoves.add(k);
+            }else{
+              nMoves.add(k);
+            }
+      });
+
+      Move chosenMove = null;
+      int chosenNum = (int)(myRandomList.get(moveNum) * moveList.size());
+
+      if(tMoves.size() == 0){
+          chosenMove = nMoves.get(chosenNum);
+      }else{
+        chosenMove = tMoves.get(chosenNum);
+      }
+
+        moveNum++;
         return chosenMove;
     }
 }
+

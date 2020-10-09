@@ -14,14 +14,10 @@ public class King extends ChessPiece {
             forwards = 1;
         }
 
-        int startRank = 0;
-        if(this.isWhite)
-            startRank = 7;
-
         int moveH, moveV;
 
         // add forward moves 
-        moveV = this.vertical + forwards;
+        moveV = this.vertical + 1;
         moveH = this.horizontal;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {
@@ -34,7 +30,7 @@ public class King extends ChessPiece {
         }
 
         // add backwards moves 
-        moveV = this.vertical - forwards;
+        moveV = this.vertical - 1;
         moveH = this.horizontal;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {
@@ -73,7 +69,7 @@ public class King extends ChessPiece {
         }
 
         // add diag F-R moves
-        moveV = this.vertical + forwards;
+        moveV = this.vertical + 1;
         moveH = this.horizontal + 1;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {
@@ -86,7 +82,7 @@ public class King extends ChessPiece {
         }
 
         // add diag F-L moves
-        moveV = this.vertical + forwards;
+        moveV = this.vertical + 1;
         moveH = this.horizontal - 1;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {
@@ -99,7 +95,7 @@ public class King extends ChessPiece {
         }
 
         // add diag B-R moves
-        moveV = this.vertical - forwards;
+        moveV = this.vertical - 1;
         moveH = this.horizontal + 1;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {
@@ -112,7 +108,7 @@ public class King extends ChessPiece {
         }
 
         // add diag B-L moves
-        moveV = this.vertical - forwards;
+        moveV = this.vertical - 1;
         moveH = this.horizontal - 1;
         if (board.locationValid(moveV,moveH) && board.testCheck(!this.isWhite) == false && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
             if (board.pieceAtLocation(moveV,moveH) == null) {

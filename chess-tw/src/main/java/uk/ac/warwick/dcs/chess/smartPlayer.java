@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 import uk.ac.warwick.dcs.chess.piece.ChessPiece;
 
-public class RandomPlayer implements Player {
+public class smartPlayer implements Player {
     private boolean isWhite;
 
 

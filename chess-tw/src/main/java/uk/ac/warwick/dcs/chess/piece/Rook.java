@@ -1,9 +1,9 @@
 package uk.ac.warwick.dcs.chess.piece;
 import uk.ac.warwick.dcs.chess.*;
-public class Rook extends ChessPiece {
+public class Knight extends ChessPiece {
     private static final long serialVersionUID = 1L;
-    public Rook(Board board, boolean isWhite, int vertical, int horizontal) {
-        super(board, isWhite, (char)((int)ChessIcons.W_ROOK + (isWhite ? 0 : 6)), vertical, horizontal);
+    public Knight(Board board, boolean isWhite, int vertical, int horizontal) {
+        super(board, isWhite, (char)((int)ChessIcons.W_KNIGHT + (isWhite ? 0 : 6)), vertical, horizontal);
     }
 
     @Override
@@ -60,6 +60,8 @@ public class Rook extends ChessPiece {
             moveH=this.horizontal;
             n++;
         }
+=======
+>>>>>>> b722ba8e74b9646492a828f1d0cf2e0d9ad22c30
 
         //just backwards 
         n=1;

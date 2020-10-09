@@ -18,6 +18,7 @@ public class Rook extends ChessPiece {
         moveV = this.vertical;
         moveH = this.horizontal+forwards;
 
+        //just right 
         n=1;
         while(board.locationValid(moveV,moveH){ 
             if(board.pieceAtLocation(moveV,moveH)==null){
@@ -31,7 +32,49 @@ public class Rook extends ChessPiece {
             moveH=this.horizontal+forwards*n;
             n++;
         }
+        //just left 
+        n=1;
+        while(board.locationValid(moveV,moveH){ 
+            if(board.pieceAtLocation(moveV,moveH)==null){
+                availabelMoves.add(new Move(this,moveV,moveH,false));
+            }
+            else{
+                availabelMoves.add(new Move(this,moveV,moveH,true));
+                break;
+            }
+            moveV=this.vertical;
+            moveH=this.horizontal-forwards*n;
+            n++;
+        }
+        //just forwards 
+        n=1;
+        while(board.locationValid(moveV,moveH){ 
+            if(board.pieceAtLocation(moveV,moveH)==null){
+                availabelMoves.add(new Move(this,moveV,moveH,false));
+            }
+            else{
+                availabelMoves.add(new Move(this,moveV,moveH,true));
+                break;
+            }
+            moveV=this.vertical+forwards*n;
+            moveH=this.horizontal;
+            n++;
+        }
 
+        //just backwards 
+        n=1;
+        while(board.locationValid(moveV,moveH){ 
+            if(board.pieceAtLocation(moveV,moveH)==null){
+                availabelMoves.add(new Move(this,moveV,moveH,false));
+            }
+            else{
+                availabelMoves.add(new Move(this,moveV,moveH,true));
+                break;
+            }
+            moveV=this.vertical-forwards*n;
+            moveH=this.horizontal;
+            n++;
+        }
         return availableMoves.movesToArray();
     }
 

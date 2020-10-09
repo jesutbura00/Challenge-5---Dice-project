@@ -1,29 +1,36 @@
 package uk.ac.warwick.dcs.chess;
+import java.util.ArrayList;
+import java.util.Random;
 import uk.ac.warwick.dcs.chess.piece.ChessPiece;
-import java.util.Scanner;
 
-public class HumanPlayer implements Player {
-    private Board board;
+public class RandomPlayer implements Player {
     private boolean isWhite;
-    private String color;
-    private ChessPiece[] pieces;
+
+
+    Random rng = new Random(Chess.randomSeed);
+
+    int moveNum;
+    ArrayList<Double> myRandomList;
 
     public String getPlayerName(){
-        return "HumanPlayer";
+        return "RandomPlayer";
     }
-    
-    public HumanPlayer(Board board, boolean isWhite) {
-        this.board = board;
+
+    public RandomPlayer (boolean isWhite) {
         this.isWhite = isWhite;
-        if(this.isWhite) {
-            color = "White";
-        } else {
-            color = "Black";
-        }
+        moveNum = 0;
+        myRandomList = new ArrayList<Double>();
+        createRandomList();
     }
-    @Override
-    public boolean getIsWhite() {
-        return isWhite;
+
+    public void createRandomList(){
+        int numDoublesToGenerate = 4;
+        while(myRandomList.size() < (moveNum+numDoublesToGenerate)){
+            double[] newNumbers = rng.doubles(numDoublesToGenerate).toArray();
+            for(int i = 0; i < numDoublesToGenerate; i++){
+                myRandomList.add(newNumbers[i]);
+            }
+        }
     }
 
     @Override
@@ -43,55 +50,69 @@ public class HumanPlayer implements Player {
         return myPieces;
     }
 
+    @Override
+    public boolean getIsWhite() {
+        return isWhite;
+    }
 
     @Override
     public Move getMove(int moveNum) {
-        Move intendedMove = null;
-        Scanner s = new Scanner(System.in);
+        // Move myMove = null;
+        this.moveNum = moveNum;
+        Board board = Chess.getBoard();
+        ChessPiece[] pieces = getActivePieces();
 
-        //Something like the below can be used in a standard Scanner mode (headless), but the 
-        // lanterna view will need a separate input scanner
+        ArrayList<Move> moveList = new ArrayList<Move>();
 
-/*        do {
-            Chess.writeOnScreen(0, 1, "text");
-            String inputString = s.next();
-
-            if(inputString.length() != 4) {
-                Chess.ChessOut.println("Error incorrect length input string");
+        String possiblePieceMoves = "";
+        for(int i = 0; i < 16; i++){
+            if(pieces[i] == null){
+                possiblePieceMoves += "--";
                 continue;
             }
-            String pieceString = inputString.substring(0,2);
-            String moveString = inputString.substring(2,4);
+            Move[] thisPieceMoves = pieces[i].getAvailableMoves();
+            possiblePieceMoves += Character.toString(pieces[i].getIcon()) + (thisPieceMoves.length);
+            for(int j = 0; j < thisPieceMoves.length; j++){
+                moveList.add(thisPieceMoves[j]);
+            }
+        }
 
-            ChessPiece piece = board.pieceAtLocation(pieceString);
+        // Chess.writeOnScreen(1, 22, possiblePieceMoves);
 
-            if(piece == null || piece.isWhite() != isWhite) {
-                Chess.ChessOut.println("Invalid piece selected. Choose again");
-                continue;
+        for(int i = moveList.size()-1; i >= 0;i--){
+            Move tmpMove = moveList.get(i);
+
+            int vm = board.validateMove(tmpMove);
+
+            if((vm & Chess.CHECK_CURRENT) == Chess.CHECK_CURRENT){
+                moveList.remove(i);
+
+                if(Chess.verbosity > 0){
+                    System.err.print("Non Validated move ");
+                    System.err.println(tmpMove);
+                }
+
+            }else{
+                if(Chess.verbosity > 0){
+                    System.err.print("Validated move ");
+                    System.err.println(tmpMove);
+                }
             }
 
-            Chess.ChessOut.println("Selected piece " + piece);
+        }
+        if(moveList.size() == 0){
+            System.err.println("Error - no moves left?!!!!");
+            return null;
+        }
 
-            String horizontalString = moveString.substring(0,1).toLowerCase();
-            String verticalString = moveString.substring(1,2);
+        int chosenNum = (int)(myRandomList.get(moveNum) * moveList.size());
 
-            int horizontal = Utilities.letterToIndex(horizontalString);
-            int vertical = Utilities.numberToIndex(verticalString);
-
-            intendedMove = piece.validMove(vertical,horizontal);
-
-            Board tmpBoard = board.cloneBoard();
-            tmpBoard.applyMove(intendedMove);
-            if(tmpBoard.testCheck(pieces[15].isWhite())){
-                Chess.ChessOut.println("Invalid move: You are in check");
-            }
-
-        } while (intendedMove == null);*/
-
-        // Chess.ChessOut.println("Human chose: " + intendedMove.toString());
-        return intendedMove;
+        Move chosenMove = moveList.get(chosenNum);
+        if(Chess.verbosity > 0){
+            System.err.println(( isWhite ? "White": "Black") + " is choosing move " + chosenNum + " " + chosenMove.toString() + " out of " + moveList.size() + " possible moves");
+        }
+        moveNum++;
+        createRandomList();
+        return chosenMove;
     }
-
-
-
 }

@@ -63,6 +63,7 @@ public class Rook extends ChessPiece {
             Move m = new Move(this, moveV, moveH, true);
             availableMoves.add(m);
             moveV += forwards;
+            break;
         }
 
         // add backward moves (taking)
@@ -72,6 +73,7 @@ public class Rook extends ChessPiece {
             Move m = new Move(this, moveV, moveH, true);
             availableMoves.add(m);
             moveV -= forwards;
+            break;
         }
 
         // add right moves (taking)
@@ -81,6 +83,7 @@ public class Rook extends ChessPiece {
             Move m = new Move(this, moveV, moveH, true);
             availableMoves.add(m);
             moveH += 1;
+            break;
         }
 
         // add left moves (taking)
@@ -90,6 +93,7 @@ public class Rook extends ChessPiece {
             Move m = new Move(this, moveV, moveH, true);
             availableMoves.add(m);
             moveH -= 1;
+            break;
         }
         
         return availableMoves.movesToArray();

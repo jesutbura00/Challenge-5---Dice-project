@@ -105,22 +105,17 @@ public class RandomPlayer implements Player {
             System.err.println("Error - no moves left?!!!!");
             return null;
         }
-
-        moveNum++;
-        HashMap<Move,Boolean> map = new HashMap<>();
-        for(Move i : moveList){
-            map.put(i,i.isTakePiece());
-        }
-
+        
         ArrayList<Move> tMoves = new ArrayList<>();
         ArrayList<Move> nMoves = new ArrayList<>();
-        map.forEach((k,val) -> {
-            if (val.equals(true)) {
+
+        for(Move i : moveList){
+           if (val.equals(true)) {
               tMoves.add(k);
             }else{
               nMoves.add(k);
             }
-      });
+        }
 
       Move chosenMove = null;
       int chosenNum = (int)(myRandomList.get(moveNum) * moveList.size());
@@ -135,3 +130,4 @@ public class RandomPlayer implements Player {
         return chosenMove;
     }
 }
+

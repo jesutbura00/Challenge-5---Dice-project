@@ -20,7 +20,7 @@ public class Rook extends ChessPiece {
 
         int moveH, moveV;
 
-        // add forward moves (without taking)
+        // add forward moves 
         moveV = this.vertical + forwards;
         moveH = this.horizontal;
         while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
@@ -35,7 +35,7 @@ public class Rook extends ChessPiece {
             }
         }
 
-        // add backward moves (without taking)
+        // add backward moves 
         moveV = this.vertical - forwards;
         moveH = this.horizontal;
         while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
@@ -50,7 +50,7 @@ public class Rook extends ChessPiece {
             }
         }
 
-        // add right moves (without taking)
+        // add right moves 
         moveV = this.vertical;
         moveH = this.horizontal + 1;
         while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
@@ -65,7 +65,7 @@ public class Rook extends ChessPiece {
             }
         }
 
-        // add left moves (without taking)
+        // add left moves
         moveV = this.vertical;
         moveH = this.horizontal - 1;
         while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {

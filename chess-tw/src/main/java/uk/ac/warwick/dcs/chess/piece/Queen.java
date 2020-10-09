@@ -10,7 +10,14 @@ public class Queen extends ChessPiece {
     public Move[] getAvailableMoves() {
         availableMoves.clear();
         int moveH, moveV;
+        int forwards = -1;
+        if(!this.isWhite){
+            forwards = 1;
+        }
 
+        int startRank = 1;
+        if(this.isWhite)
+            startRank = 6;
         // add forward moves 
         moveV = this.vertical + forwards;
         moveH = this.horizontal;

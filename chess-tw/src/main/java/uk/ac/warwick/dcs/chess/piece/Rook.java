@@ -23,77 +23,61 @@ public class Rook extends ChessPiece {
         // add forward moves (without taking)
         moveV = this.vertical + forwards;
         moveH = this.horizontal;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) == null) {
-            Move m = new Move(this, moveV, moveH, false);
-            availableMoves.add(m);
-            moveV += forwards;
+        while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                moveV += forwards;
+            } else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
+                break;
+            }
         }
 
         // add backward moves (without taking)
         moveV = this.vertical - forwards;
         moveH = this.horizontal;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) == null) {
-            Move m = new Move(this, moveV, moveH, false);
-            availableMoves.add(m);
-            moveV -= forwards;
+        while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                moveV -= forwards;
+            } else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
+                break;
+            }
         }
 
         // add right moves (without taking)
         moveV = this.vertical;
         moveH = this.horizontal + 1;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) == null) {
-            Move m = new Move(this, moveV, moveH, false);
-            availableMoves.add(m);
-            moveH += 1;
+        while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                moveH += 1;
+            } else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
+                break;
+            }
         }
 
         // add left moves (without taking)
         moveV = this.vertical;
         moveH = this.horizontal - 1;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) == null) {
-            Move m = new Move(this, moveV, moveH, false);
-            availableMoves.add(m);
-            moveH -= 1;
-        }
-
-        // add forward moves (taking)
-        moveV = this.vertical + forwards;
-        moveH = this.horizontal;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) != null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) {
-            Move m = new Move(this, moveV, moveH, true);
-            availableMoves.add(m);
-            moveV += forwards;
-            break;
-        }
-
-        // add backward moves (taking)
-        moveV = this.vertical - forwards;
-        moveH = this.horizontal;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) != null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) {
-            Move m = new Move(this, moveV, moveH, true);
-            availableMoves.add(m);
-            moveV -= forwards;
-            break;
-        }
-
-        // add right moves (taking)
-        moveV = this.vertical;
-        moveH = this.horizontal + 1;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) != null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) {
-            Move m = new Move(this, moveV, moveH, true);
-            availableMoves.add(m);
-            moveH += 1;
-            break;
-        }
-
-        // add left moves (taking)
-        moveV = this.vertical;
-        moveH = this.horizontal - 1;
-        while (board.locationValid(moveV,moveH) && board.pieceAtLocation(moveV,moveH) != null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) {
-            Move m = new Move(this, moveV, moveH, true);
-            availableMoves.add(m);
-            moveH -= 1;
-            break;
+        while (board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)) {
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                moveH -= 1;
+            } else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
+                break;
+            }
         }
         
         return availableMoves.movesToArray();

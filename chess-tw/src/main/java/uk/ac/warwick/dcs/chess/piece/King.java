@@ -9,10 +9,6 @@ public class King extends ChessPiece {
     @Override
     public Move[] getAvailableMoves() {
         availableMoves.clear();
-        int forwards = -1;
-        if(!this.isWhite){
-            forwards = 1;
-        }
 
         int moveH, moveV;
 

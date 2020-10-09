@@ -27,8 +27,8 @@ public class Rook extends ChessPiece {
                 availabelMoves.add(new Move(this,moveV,moveH,true));
                 break;
             }
-            moveV=this.vertical;
-            moveH=this.horizontal+forwards*n;
+            moveV=this.vertical+forwards*n;
+            moveH=this.horizontal;
             n++;
         }
 

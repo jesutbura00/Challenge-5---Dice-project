@@ -11,7 +11,66 @@ public class Bishop extends ChessPiece {
     @Override
     public Move[] getAvailableMoves() {
         availableMoves.clear();
+        int moveH,moveV;
+        for(int i =0; i<8; i++){
+            moveV = this.vertical + i;
+            moveH = this.horizontal + i;
+            if(!board.locationValid(moveV, moveH)){
+                break;
+            }
+            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
+                Move m = new Move(this,moveV,moveH, false);
+                availableMoves.add(m);
+            }
 
+            
+        }
+
+        //2
+        for(int i =0; i<8; i++){
+            moveV = this.vertical + i;
+            moveH = this.horizontal - i;
+            if(!board.locationValid(moveV, moveH)){
+                break;
+            }
+            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
+                Move m = new Move(this,moveV,moveH, false);
+                availableMoves.add(m);
+            }
+
+            
+        }
+
+        //3
+        for(int i =0; i<8; i++){
+            moveV = this.vertical - i;
+            moveH = this.horizontal + i;
+            if(!board.locationValid(moveV, moveH)){
+                break;
+            }
+            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
+                Move m = new Move(this,moveV,moveH, false);
+                availableMoves.add(m);
+            }
+
+            
+        }
+
+        //4
+        for(int i =0; i<8; i++){
+            moveV = this.vertical - i;
+            moveH = this.horizontal - i;
+            if(!board.locationValid(moveV, moveH)){
+                break;
+            }
+            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
+                Move m = new Move(this,moveV,moveH, false);
+                availableMoves.add(m);
+            }
+
+            
+        }
         return availableMoves.movesToArray();
     }
 }
+

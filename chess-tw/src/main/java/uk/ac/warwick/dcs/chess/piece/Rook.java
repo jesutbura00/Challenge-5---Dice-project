@@ -11,11 +11,6 @@ public class Knight extends ChessPiece {
         availableMoves.clear();
         
 
-        int startRankx = 0;
-        int startRanky =1;
-        if(this.isWhite)
-            startRankx = 7;
-
         int moveH, moveV;
         moveV = this.vertical + 2;
         moveH = this.horizontal+1;

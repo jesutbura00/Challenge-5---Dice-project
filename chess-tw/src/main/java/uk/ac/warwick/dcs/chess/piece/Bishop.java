@@ -12,65 +12,84 @@ public class Bishop extends ChessPiece {
     public Move[] getAvailableMoves() {
         availableMoves.clear();
         int moveH,moveV;
-        for(int i =0; i<8; i++){
-            moveV = this.vertical + i;
-            moveH = this.horizontal + i;
-            if(!board.locationValid(moveV, moveH)){
+        
+        int i = 1;
+        moveV = this.vertical + i;
+        moveH = this.horizontal + i;
+
+        //forward
+        while(board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)){
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                i++;
+                moveV += i;
+                moveH += i;
+            }else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
                 break;
             }
-            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
-                Move m = new Move(this,moveV,moveH, false);
-                availableMoves.add(m);
-            }
-
-            
         }
 
-        //2
-        for(int i =0; i<8; i++){
-            moveV = this.vertical + i;
-            moveH = this.horizontal - i;
-            if(!board.locationValid(moveV, moveH)){
+
+        i = 1;
+        moveV = this.vertical - i;
+        moveH = this.horizontal - i;
+
+        //forward
+        while(board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)){
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                i++;
+                moveV += i;
+                moveH += i;
+            }else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
                 break;
             }
-            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
-                Move m = new Move(this,moveV,moveH, false);
-                availableMoves.add(m);
-            }
+        }
+        
+        i = 1;
+        moveV = this.vertical + i;
+        moveH = this.horizontal - i;
 
-            
+        //forward
+        while(board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)){
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                i++;
+                moveV += i;
+                moveH += i;
+            }else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
+                break;
+            }
         }
 
-        //3
-        for(int i =0; i<8; i++){
-            moveV = this.vertical - i;
-            moveH = this.horizontal + i;
-            if(!board.locationValid(moveV, moveH)){
+        
+        i = 1;
+        moveV = this.vertical - i;
+        moveH = this.horizontal + i;
+
+        //forward
+        while(board.locationValid(moveV,moveH) && (board.pieceAtLocation(moveV,moveH) == null || board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite)){
+            if (board.pieceAtLocation(moveV,moveH) == null) {
+                Move m = new Move(this, moveV, moveH, false);
+                availableMoves.add(m);
+                i++;
+                moveV += i;
+                moveH += i;
+            }else {
+                Move m = new Move(this, moveV, moveH, true);
+                availableMoves.add(m);
                 break;
             }
-            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
-                Move m = new Move(this,moveV,moveH, false);
-                availableMoves.add(m);
-            }
-
-            
-        }
-
-        //4
-        for(int i =0; i<8; i++){
-            moveV = this.vertical - i;
-            moveH = this.horizontal - i;
-            if(!board.locationValid(moveV, moveH)){
-                break;
-            }
-            if (board.pieceAtLocation(moveV,moveH) == null && board.pieceAtLocation(moveV,moveH).isWhite != this.isWhite) { 
-                Move m = new Move(this,moveV,moveH, false);
-                availableMoves.add(m);
-            }
-
-            
         }
         return availableMoves.movesToArray();
     }
 }
-

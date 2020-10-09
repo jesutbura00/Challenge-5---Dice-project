@@ -106,7 +106,7 @@ public class RandomPlayer implements Player {
             return null;
         }
 
-        moveNum++;
+ 
         HashMap<Move,Boolean> map = new HashMap<>();
         for(Move i : moveList){
             map.put(i,i.isTakePiece());

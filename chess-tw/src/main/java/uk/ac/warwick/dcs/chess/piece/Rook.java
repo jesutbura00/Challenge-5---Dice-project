@@ -9,6 +9,28 @@ public class Rook extends ChessPiece {
     @Override
     public Move[] getAvailableMoves() {
         availableMoves.clear();
+        
+        int forwards = -1;
+        if(!this.isWhite){
+            forwards = 1;
+        }
+        int moveH, moveV;
+        moveV = this.vertical;
+        moveH = this.horizontal+forwards;
+
+        n=1;
+        while(board.locationValid(moveV,moveH){ 
+            if(board.pieceAtLocation(moveV,moveH)==null){
+                availabelMoves.add(new Move(this,moveV,moveH,false));
+            }
+            else{
+                availabelMoves.add(new Move(this,moveV,moveH,true));
+                break;
+            }
+            moveV=this.vertical;
+            moveH=this.horizontal+forwards*n;
+            n++;
+        }
 
         return availableMoves.movesToArray();
     }
